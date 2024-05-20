@@ -51,8 +51,8 @@ class HotelServiceTest {
         assertEquals(response.getTotalElements(), 1);
         assertEquals(hotel.getLocalization(), response.getContent().get(0).localization());
         assertEquals(hotel.getName(), response.getContent().get(0).name());
-        assertEquals(hotel.getCheckIn(), response.getContent().get(0).checkIn());
-        assertEquals(hotel.getCheckOut(), response.getContent().get(0).checkOut());
+        assertEquals(hotel.getCheckIn(), response.getContent().get(0).checkIn().get(0));
+        assertEquals(hotel.getCheckOut(), response.getContent().get(0).checkOut().get(0));
         assertEquals(hotel.getNumberOfRooms(), response.getContent().get(0).numberOfRooms());
         assertEquals(hotel.getNumberOfGuest(), response.getContent().get(0).numberOfGuest());
         verify(hotelRepository, only()).getHotelFilters(LOCALIZATION, 1 , 1, LOCAL_DATE_TIME, LOCAL_DATE_TIME, pageable);
@@ -77,8 +77,8 @@ class HotelServiceTest {
         assertEquals(response.getTotalElements(), 1);
         assertEquals(hotel.getLocalization(), response.getContent().get(0).localization());
         assertEquals(hotel.getName(), response.getContent().get(0).name());
-        assertEquals(hotel.getCheckIn(), response.getContent().get(0).checkIn());
-        assertEquals(hotel.getCheckOut(), response.getContent().get(0).checkOut());
+        assertEquals(hotel.getCheckIn(), response.getContent().get(0).checkIn().get(0));
+        assertEquals(hotel.getCheckOut(), response.getContent().get(0).checkOut().get(0));
         assertEquals(hotel.getNumberOfRooms(), response.getContent().get(0).numberOfRooms());
         assertEquals(hotel.getNumberOfGuest(), response.getContent().get(0).numberOfGuest());
         verify(hotelRepository, only()).findAll(pageable);

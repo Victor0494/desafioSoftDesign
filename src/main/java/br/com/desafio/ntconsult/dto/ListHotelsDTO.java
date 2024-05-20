@@ -5,14 +5,17 @@ import br.com.desafio.ntconsult.entities.Hotel;
 import lombok.Builder;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Builder
 public record ListHotelsDTO(
                             Long id,
                             String name,
                             String localization,
-                            String checkIn,
-                            String checkOut,
+                            List<String> checkIn,
+                            List<String> checkOut,
                             Integer numberOfRooms,
                             Integer numberOfGuest,
                             BigDecimal pricePerNight,
@@ -23,13 +26,19 @@ public record ListHotelsDTO(
         this(   hotel.getId(),
                 hotel.getName(),
                 hotel.getLocalization(),
-                hotel.getCheckIn(),
-                hotel.getCheckOut(),
+                listOfValidDate(hotel.getCheckIn()),
+                listOfValidDate(hotel.getCheckOut()),
                 hotel.getNumberOfRooms(),
                 hotel.getNumberOfGuest(),
                 hotel.getPricePerNight(),
                 new ConvenienceDTO(hotel.getConvenience()),
                 hotel.getRating());
     }
+
+    private static List<String> listOfValidDate(String checkIn) {
+        return new ArrayList<>(Arrays.asList(checkIn.split(",")));
+
+    }
+
 
 }
