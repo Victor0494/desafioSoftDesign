@@ -19,6 +19,8 @@ public class Guest {
 
     private String name;
 
+    private String document;
+
     private String phone;
 
     private String email;
@@ -34,6 +36,7 @@ public class Guest {
     public Guest(GuestDTO guest) {
         this.name = guest.name();
         this.phone = guest.phone();
+        this.document = guest.document();
         this.email = guest.email();
         this.paymentDetails = new PaymentDetails(guest.payment());
     }

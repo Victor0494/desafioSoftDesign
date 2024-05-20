@@ -9,7 +9,7 @@ public record PaymentsDetailsDTO(PaymentMethod paymentMethod, BigDecimal totalAm
 
     @Override
     public String toString() {
-        return"paymentMethod=" + paymentMethod +
-                ", totalAmount=" + totalAmount;
+        return"Método de pagamento= " + paymentMethod +
+                ", Valor total= " + totalAmount;
     }
 }

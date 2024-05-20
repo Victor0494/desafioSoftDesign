@@ -17,10 +17,12 @@ public class RabbitListener {
                 Hotel: %s
                 CheckIn: %s
                 Responsável: %s
+                Informações do pagamento: %s
                 """.formatted(reservationDetailsDTO.id(),
                 reservationDetailsDTO.hotelName(),
                 reservationDetailsDTO.checkIn(),
-                reservationDetailsDTO.responsibleGuest());
+                reservationDetailsDTO.responsibleGuest(),
+                reservationDetailsDTO.responsibleGuest().payment());
         System.out.println(message);
         log.debug("RabbitListener.receivedConfirmedReservation: {}", message);
     }

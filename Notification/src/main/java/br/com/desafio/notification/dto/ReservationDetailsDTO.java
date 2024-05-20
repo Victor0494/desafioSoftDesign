@@ -5,6 +5,6 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-public record ReservationDetailsDTO(Long id, String hotelName, Integer numberOfRooms, Integer numberOfGuest, String checkIn, GuestDTO responsibleGuest) {
+public record ReservationDetailsDTO(Long id, String hotelName, Integer numberOfRooms, Integer numberOfGuest, String checkIn, String checkOut, GuestDTO responsibleGuest) {
 
 }
