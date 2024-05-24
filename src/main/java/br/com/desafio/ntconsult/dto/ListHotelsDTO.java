@@ -19,7 +19,7 @@ public record ListHotelsDTO(
                             Integer numberOfRooms,
                             Integer numberOfGuest,
                             BigDecimal pricePerNight,
-                            ConvenienceDTO convenienceDTO,
+                            ConvenienceDTO convenience,
                             Rating rating) {
 
     public ListHotelsDTO(Hotel hotel) {
