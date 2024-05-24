@@ -15,9 +15,6 @@ O desafio consistia em criar um sistema de reserva de hotéis capaz de lidar com
     Java na versão 17:
     [link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
-    Mysql: 
-    [link](https://hub.docker.com/_/mysql)
-
     RabbitMq:
     [link](https://hub.docker.com/_/rabbitmq)
 
