@@ -36,7 +36,7 @@ uma API REST:
 
  * Foi dispobilizado um docker-compose com o **Redis** e um **banco de dados MySQL** na raiz do projeto
  * A api para validação de CPF dispobilizada no desafio não funciona, pois o serviço parece ter sido removido do ar, porém realizei a implementação do mesmo, mas também realizei a criação de um modulo que replicasse o comportamento descrito no desafio, ou seja há duas implementações para validação do CPF.
- * Para realizar a implementação descrita no desafio, basta passar a variável **'local'**, no endpoint **/v1/vote/{topicId}**.
+ * Para realizar a implementação descrita no desafio, basta passar a variável **'local'** como **false**, no endpoint **/v1/vote/{topicId}**.
  * Caso queira seguir com a implementação que eu criei, basta rodar o modulo **Generate**, dentro do projeto
 
 ## Build do projeto
