@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "d32083b9-dd75-419c-8feb-df3e296c1da9",
+		"name": "SoftDesing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4378921"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function generateCPF() {\r",
+							"    function randomDigits(n) {\r",
+							"        return Array.from({ length: n }, () => Math.floor(Math.random() * 10)).join('');\r",
+							"    }\r",
+							"\r",
+							"    function calculateDigit(cpfBase) {\r",
+							"        let sum = 0;\r",
+							"        for (let i = 0; i < cpfBase.length; i++) {\r",
+							"            sum += parseInt(cpfBase[i]) * (cpfBase.length + 1 - i);\r",
+							"        }\r",
+							"        let remainder = sum % 11;\r",
+							"        return remainder < 2 ? 0 : 11 - remainder;\r",
+							"    }\r",
+							"\r",
+							"    let cpfBase = randomDigits(9);\r",
+							"    let firstDigit = calculateDigit(cpfBase);\r",
+							"    let secondDigit = calculateDigit(cpfBase + firstDigit);\r",
+							"\r",
+							"    return cpfBase + firstDigit + secondDigit;\r",
+							"}\r",
+							"\r",
+							"// Armazena o CPF gerado como variável no Postman\r",
+							"pm.globals.set(\"cpf\", generateCPF());\r",
+							"console.log(\"CPF Gerado:\", pm.globals.get(\"cpf\"));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cpf\": \"{{cpf}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localHost}}/v1/user",
+					"host": [
+						"{{localHost}}"
+					],
+					"path": [
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTopic",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"teste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localHost}}/v1/pauta",
+					"host": [
+						"{{localHost}}"
+					],
+					"path": [
+						"v1",
+						"pauta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateSession",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{localHost}}/v1/session?pautaId=1&duration=1",
+					"host": [
+						"{{localHost}}"
+					],
+					"path": [
+						"v1",
+						"session"
+					],
+					"query": [
+						{
+							"key": "pautaId",
+							"value": "1"
+						},
+						{
+							"key": "duration",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VoteTopic",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{localHost}}/v1/vote/:topicId?cpf=02588786065&vote=true",
+					"host": [
+						"{{localHost}}"
+					],
+					"path": [
+						"v1",
+						"vote",
+						":topicId"
+					],
+					"query": [
+						{
+							"key": "cpf",
+							"value": "02588786065"
+						},
+						{
+							"key": "vote",
+							"value": "true"
+						}
+					],
+					"variable": [
+						{
+							"key": "topicId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetVoteResult",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"function generateCPF() {\r",
+					"    function randomDigits(n) {\r",
+					"        return Array.from({ length: n }, () => Math.floor(Math.random() * 10)).join('');\r",
+					"    }\r",
+					"\r",
+					"    function calculateDigit(cpfBase) {\r",
+					"        let sum = 0;\r",
+					"        for (let i = 0; i < cpfBase.length; i++) {\r",
+					"            sum += parseInt(cpfBase[i]) * (cpfBase.length + 1 - i);\r",
+					"        }\r",
+					"        let remainder = sum % 11;\r",
+					"        return remainder < 2 ? 0 : 11 - remainder;\r",
+					"    }\r",
+					"\r",
+					"    let cpfBase = randomDigits(9);\r",
+					"    let firstDigit = calculateDigit(cpfBase);\r",
+					"    let secondDigit = calculateDigit(cpfBase + firstDigit);\r",
+					"\r",
+					"    return cpfBase + firstDigit + secondDigit;\r",
+					"}\r",
+					"\r",
+					"// Armazena o CPF gerado como variável no Postman\r",
+					"pm.globals.set(\"cpfValido\", generateCPF());\r",
+					"console.log(\"CPF Gerado:\", pm.globals.get(\"cpfValido\"));\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
