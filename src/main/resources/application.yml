@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DATA_BASE_URL:jdbc:h2:mem:mydb}
+    url: ${DATA_BASE_URL:jdbc:h2:mem:testdb}
     username: ${DATA_USERNAME:sa}
     password: ${DATA_USER_PASSWORD:password}
     driverClassName: ${DATA_DRIVER:org.h2.Driver}
@@ -9,6 +9,10 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: ${DATA_BASE_PLATFORM:org.hibernate.dialect.H2Dialect}
+  h2:
+    console:
+      enabled: true  # Ativa o console H2
+      path: /h2-console  # URL de acesso ao console H2
   flyway:
     enabled: true
     clean-on-validation-error: true
@@ -35,6 +39,9 @@ management:
   endpoint:
     health:
       show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
 
 application:
   client:
@@ -42,3 +49,17 @@ application:
       url: http://localhost:8081
     heroku:
       url: https://user-info.herokuapp.com
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      localService:
+        failureRateThreshold: 50  # Se 50% das chamadas falharem, o circuito abre
+        waitDurationInOpenState: 10s  # Tempo de espera antes de tentar restabelecer o circuito
+        slidingWindowSize: 5  # Número de requisições analisadas para tomar decisão
+        minimumNumberOfCalls: 2  # Garantir que pelo menos 2 requisições sejam feitas antes de avaliar
+        permittedNumberOfCallsInHalfOpenState: 3  # Quantas chamadas podem ser feitas no estado semi-aberto
+  timelimiter:
+    instances:
+      localService:
+        timeoutDuration: 3s  # Tempo máximo de resposta antes de considerar falha

@@ -27,13 +27,16 @@ uma API REST:
 * Dependências:
 
     Java na versão 21:
-    [link](https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe)
+    [download](https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe)
 
     Redis:
-    [link](https://redis.io/downloads/)
+    [download](https://redis.io/downloads/)
+    
+    Mysql:
+    [download](https://www.mysql.com/downloads/)
 
 ## ⚙️ Observações de Configuração ⚠️
-
+ * Aplicação rodando em um banco H2, em memória.
  * Foi dispobilizado um docker-compose com o **Redis** e um **banco de dados MySQL** na raiz do projeto
  * A api para validação de CPF dispobilizada no desafio não funciona, pois o serviço parece ter sido removido do ar, porém realizei a implementação do mesmo, mas também realizei a criação de um modulo que replicasse o comportamento descrito no desafio, ou seja há duas implementações para validação do CPF.
  * Para realizar a implementação descrita no desafio, basta passar a variável **'local'** como **false**, no endpoint **/v1/vote/{topicId}**.

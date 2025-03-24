@@ -3,7 +3,7 @@ package br.com.challange.softDesign.application.service.impl;
 import br.com.challange.softDesign.application.dto.request.UserRequestDTO;
 import br.com.challange.softDesign.application.dto.response.UserResponseDTO;
 import br.com.challange.softDesign.application.exception.UserAlreadyExistException;
-import br.com.challange.softDesign.application.model.User;
+import br.com.challange.softDesign.application.model.Voters;
 import br.com.challange.softDesign.application.service.UserService;
 import br.com.challange.softDesign.infra.web.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,11 +29,11 @@ public class UserServiceImpl implements UserService {
 
         validateUserAlreadyCreated(userRequestDTO.cpf());
 
-        User user = mapper.convertValue(userRequestDTO, User.class);
+        Voters voters = mapper.convertValue(userRequestDTO, Voters.class);
 
-        User userSaved = userRepository.save(user);
+        Voters votersSaved = userRepository.save(voters);
 
-        UserResponseDTO response = mapper.convertValue(userSaved, UserResponseDTO.class);
+        UserResponseDTO response = mapper.convertValue(votersSaved, UserResponseDTO.class);
 
         log.debug("UserServiceImpl.createUser - End - Output: response: {}", response);
 

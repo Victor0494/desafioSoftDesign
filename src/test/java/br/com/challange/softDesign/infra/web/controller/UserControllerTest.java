@@ -2,10 +2,7 @@ package br.com.challange.softDesign.infra.web.controller;
 
 import br.com.challange.softDesign.application.dto.request.UserRequestDTO;
 import br.com.challange.softDesign.application.dto.response.UserResponseDTO;
-import br.com.challange.softDesign.application.model.User;
-import br.com.challange.softDesign.application.service.TopicService;
 import br.com.challange.softDesign.application.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -23,7 +23,7 @@ CREATE TABLE vote (
 );
 
 -- Criação da tabela User
-CREATE TABLE user (
+CREATE TABLE voters (
     id CHAR(36) PRIMARY KEY,  -- Armazenando o UUID como String
     cpf VARCHAR(14) NOT NULL UNIQUE
 );

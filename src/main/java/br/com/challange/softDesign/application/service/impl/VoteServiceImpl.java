@@ -1,7 +1,7 @@
 package br.com.challange.softDesign.application.service.impl;
 
 import br.com.challange.softDesign.application.exception.*;
-import br.com.challange.softDesign.application.model.User;
+import br.com.challange.softDesign.application.model.Voters;
 import br.com.challange.softDesign.infra.config.client.HerokuClient;
 import br.com.challange.softDesign.infra.config.client.LocalClient;
 import br.com.challange.softDesign.domain.constant.VoteStatus;
@@ -65,12 +65,12 @@ public class VoteServiceImpl implements VoteService {
             throw new SessionFinishedException(SESSION_FINISHED.getMessage());
         }
 
-        User user = userRepository.findById(userId)
+        Voters voters = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND.getMessage()));
 
-        validateUserCpf(user.getCpf(), topic, local);
+        validateUserCpf(voters.getCpf(), topic, local);
 
-        Vote voteResponse = voteRepository.save(Vote.builder().topic(topic).cpf(user.getCpf()).vote(vote).build());
+        Vote voteResponse = voteRepository.save(Vote.builder().topic(topic).cpf(voters.getCpf()).vote(vote).build());
         voteResponse.setCpf(maskCpf(voteResponse.getCpf()));
 
         VoteResponseDTO voteResponseDTO = mapper.convertValue(voteResponse, VoteResponseDTO.class);

@@ -3,6 +3,7 @@ package br.com.challange.softDesign.infra.web.controller;
 import br.com.challange.softDesign.application.dto.request.UserRequestDTO;
 import br.com.challange.softDesign.application.dto.response.UserResponseDTO;
 import br.com.challange.softDesign.application.service.UserService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
@@ -23,6 +24,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
+    @ApiResponse(responseCode = "201", description = "create a user")
     public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userRequestDTO) {
         log.info("UserController.createUser - Start - Input: userRequestDTO: {}", userRequestDTO);
         UserResponseDTO response = userService.createUser(userRequestDTO);

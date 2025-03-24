@@ -6,7 +6,7 @@ import br.com.challange.softDesign.application.dto.response.VoteResponseDTO;
 import br.com.challange.softDesign.application.exception.*;
 import br.com.challange.softDesign.application.model.Session;
 import br.com.challange.softDesign.application.model.Topic;
-import br.com.challange.softDesign.application.model.User;
+import br.com.challange.softDesign.application.model.Voters;
 import br.com.challange.softDesign.application.model.Vote;
 import br.com.challange.softDesign.domain.constant.VoteStatus;
 import br.com.challange.softDesign.infra.config.client.LocalClient;
@@ -86,7 +86,7 @@ class VoteServiceImplTest {
         when(mapper.convertValue(voteResponse, VoteResponseDTO.class))
                 .thenReturn(voteResponseDTO);
         when(userRepository.findById(uuid))
-                .thenReturn(Optional.ofNullable(User.builder().cpf(cpf).build()));
+                .thenReturn(Optional.ofNullable(Voters.builder().cpf(cpf).build()));
 
         VoteResponseDTO response = voteService.createVote(TOPIC_ID, uuid, vote, true);
 
@@ -159,14 +159,14 @@ class VoteServiceImplTest {
         boolean vote = true;
         Topic topic = getTopic(description, TOPIC_ID);
         Session session = getSession(topic);
-        User user = getUser(cpf);
+        Voters voters = getUser(cpf);
 
         when(topicRepository.findById(TOPIC_ID))
                 .thenReturn(Optional.ofNullable(topic));
         when(sessionRepository.findByTopic(topic))
                 .thenReturn(Optional.of(session));
         when(userRepository.findById(uuid))
-                .thenReturn(Optional.ofNullable(user));
+                .thenReturn(Optional.ofNullable(voters));
 
         when(client.validateCPF(cpf)).thenThrow(FeignException.NotFound.class);
 
@@ -184,14 +184,14 @@ class VoteServiceImplTest {
         boolean vote = true;
         Topic topic = getTopic(description, TOPIC_ID);
         Session session = getSession(topic);
-        User user = getUser(cpf);
+        Voters voters = getUser(cpf);
 
         when(topicRepository.findById(TOPIC_ID))
                 .thenReturn(Optional.ofNullable(topic));
         when(sessionRepository.findByTopic(topic))
                 .thenReturn(Optional.ofNullable(session));
         when(userRepository.findById(uuid))
-                .thenReturn(Optional.ofNullable(user));
+                .thenReturn(Optional.ofNullable(voters));
         when(client.validateCPF(cpf))
                 .thenReturn(UserVoteStatusResponseDTO.builder().status(VoteStatus.UNABLE_TO_VOTE).build());
 
@@ -209,14 +209,14 @@ class VoteServiceImplTest {
         boolean vote = true;
         Topic topic = getTopic(description, TOPIC_ID);
         Session session = getSession(topic);
-        User user = getUser(cpf);
+        Voters voters = getUser(cpf);
 
         when(topicRepository.findById(TOPIC_ID))
                 .thenReturn(Optional.ofNullable(topic));
         when(sessionRepository.findByTopic(topic))
                 .thenReturn(Optional.ofNullable(session));
         when(userRepository.findById(uuid))
-                .thenReturn(Optional.ofNullable(user));
+                .thenReturn(Optional.ofNullable(voters));
         when(client.validateCPF(cpf))
                 .thenReturn(UserVoteStatusResponseDTO.builder().status(VoteStatus.ABLE_TO_VOTE).build());
         when(voteRepository.existsByTopicAndCpf(topic, cpf)).thenReturn(true);
@@ -281,8 +281,8 @@ class VoteServiceImplTest {
                 .build();
     }
 
-    private static User getUser(String cpf) {
-        return User.builder()
+    private static Voters getUser(String cpf) {
+        return Voters.builder()
                 .id(uuid)
                 .cpf(cpf)
                 .build();
