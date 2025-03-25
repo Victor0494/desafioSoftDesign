@@ -6,7 +6,7 @@ por votação. Imagine que você deve criar uma solução para dispositivos móv
 e participar dessas sessões de votação.
 
 Essa solução deve ser executada na nuvem e promover as seguintes funcionalidades através de
-uma API REST:
+uma API REST.
 
     ● Cadastrar uma nova pauta
 
